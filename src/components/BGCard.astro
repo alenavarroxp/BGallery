@@ -1,0 +1,11 @@
+---
+const { background } = Astro.props;
+const { data, slug } = background;
+const { title, component } = data;
+---
+
+<div class="relative w-72 h-72 shadow-md duration-300 shadow-black">
+  <div class="abasolute inset-0" set:html={component} />
+
+  <div class="absolute inset-0 z-10 flex justify-center items-center"></div>
+</div>

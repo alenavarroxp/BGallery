@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Title from "../components/Title.astro";
+import BGCard from "../components/BGCard.astro";
+import { getCollection } from "astro:content";
+
+const backgrounds = await getCollection("backgrounds");
+
+const firstBackground = backgrounds.length > 0 ? backgrounds[0] : null;
+const { slug, data } = firstBackground || {};
+const { component } = data || {};
+---
+
+<Layout title="BGallery">
+  <div class="relative w-full h-screen">
+    <div class="absolute " set:html={component} />
+    <!-- Título -->
+  <Title class="text-white text-4xl md:text-5xl font-bold text-center pt-16" />
+
+  <!-- Contenedor de tarjetas -->
+  <div class="h-full flex flex-col items-center justify-center p-8 gap-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        backgrounds.map((background) => (
+          <BGCard key={background.slug} background={background} />
+        ))
+      }
+    </div>
+  </div>
+  </div>
+
+  
+</Layout>
